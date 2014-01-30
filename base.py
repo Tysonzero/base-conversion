@@ -22,10 +22,14 @@ def toNumber(value, base):
 	value = str(value)
 	number = 0
 	i = 0
+	b = 0
+
+	if digits.get(base, ''):
+		b = base 
 
 	for char in reversed(value):
-		if digits.find(char) != -1 and digits.find(char) < base:
-			number += digits.find(char) * base**i
+		if digits[b].find(char) != -1 and digits[b].find(char) < base:
+			number += digits[b].find(char) * base**i
 
 		i += 1
 
@@ -38,12 +42,16 @@ def fromNumber(number, base):
 
 	value = ''
 	i = 0
+	b = 0
+
+	if digits.get(base, ''):
+		b = base 
 
 	try:
 		for i in reversed(xrange(1 + int(round(math.log(number, base), 10)))):
 			x = int(number / base**i)
 			number -= x * base**i
-			value += digits[x]
+			value += digits[b][x]
 	except ValueError:
 		value = '0'
 
