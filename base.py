@@ -2,15 +2,12 @@ import math
 
 digits = {
     0:'0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ',
-    2:'01',
-    10:'0123456789',
-    16:'0123456789ABCDEF',
 }
 
 def setDigits(value, base=0):
     if base < 0 or base == 1:
         raise ValueError, 'Base must be an integer greater than or equal to 2 or 0 to set default.'
-    digits[base] = value
+    digits[base] = str(value)
 
 def convert(value, initial, terminal):
     return fromNumber(toNumber(value, initial), terminal)
@@ -20,18 +17,27 @@ def toNumber(value, base):
         raise ValueError, 'Base must be an integer greater than or equal to 2.'
 
     value = str(value)
+
+    decimal = value.find('.')
+
+    value = value.replace('.', '')
+
+    if (decimal == -1):
+        i = len(value)
+    else:
+        i = decimal
+
     number = 0
-    i = 0
     b = 0
 
     if digits.get(base, ''):
         b = base 
 
-    for char in reversed(value):
+    for char in value:
+        i -= 1
+
         if digits[b].find(char) != -1 and digits[b].find(char) < base:
             number += digits[b].find(char) * base**i
-
-        i += 1
 
     return number
 
