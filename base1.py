@@ -50,6 +50,6 @@ def fromNumber(number, base):
             number -= x * base**i
             value += digits[b][x]
     except ValueError:
-        value = '0'
+        value = digits[b][0]
 
     return value
