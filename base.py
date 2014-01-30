@@ -9,8 +9,8 @@ def setDigits(value, base=0):
         raise ValueError, 'Base must be an integer greater than or equal to 2 or 0 to set default.'
     digits[base] = str(value)
 
-def convert(value, initial, terminal):
-    return fromNumber(toNumber(value, initial), terminal)
+def convert(value, initial, terminal, precision=0):
+    return fromNumber(toNumber(value, initial), terminal, precision)
 
 def toNumber(value, base):
     if int(base) < 2 or int(base) != base:
@@ -42,7 +42,12 @@ def toNumber(value, base):
     return number
 
 
-def fromNumber(number, base):
+def fromNumber(number, base, precision=0):
+    if precision:
+        number = float(number)
+    else:
+        number = int(number)
+
     if int(base) < 2 or int(base) != base:
         raise ValueError, 'Base must be an integer greater than or equal to 2.'
 
@@ -54,11 +59,14 @@ def fromNumber(number, base):
         b = base 
 
     try:
-        for i in reversed(xrange(1 + int(round(math.log(number, base), 10)))):
-            x = int(number / base**i)
-            number -= x * base**i
+        for i in reversed(xrange(precision + 1 + int(round(math.log(number, base), 10)))):
+            x = int(number / base**(i - precision))
+            number -= x * base**(i - precision)
             value += digits[b][x]
     except ValueError:
         value = digits[b][0]
+
+    if precision:
+        value = value[:len(value) - precision] + '.' + value[len(value) - precision:]
 
     return value
