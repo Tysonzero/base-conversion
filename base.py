@@ -8,6 +8,14 @@ separators = {
     0:'.',
 }
 
+def intLog(number, base):
+    i = 0
+
+    while base**i <= number:
+        i += 1
+
+    return i - 1
+
 def setDigits(value, base=0):
     if base < 0 or base == 1:
         raise ValueError, 'Base must be an integer greater than or equal to 2 (or 0 to set default).'
@@ -79,7 +87,7 @@ def toBase(number, base, precision=0):
     i = 0
 
     try:
-        for i in reversed(xrange(precision + 1 + int(round(math.log(number, base), 10)))):
+        for i in reversed(xrange(precision + 1 + intLog(number, base))):
             x = int(number / base**(i - precision))
             number -= x * base**(i - precision)
             value += digits[b][x]
