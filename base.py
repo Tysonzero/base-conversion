@@ -4,45 +4,59 @@ digits = {
     0:'0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ',
 }
 
+separators = {
+    0:'.',
+}
+
 def setDigits(value, base=0):
     if base < 0 or base == 1:
-        raise ValueError, 'Base must be an integer greater than or equal to 2 or 0 to set default.'
+        raise ValueError, 'Base must be an integer greater than or equal to 2 (or 0 to set default).'
     digits[base] = str(value)
 
+def setSeparators(value, base=0):
+    if base < 0 or base == 1:
+        raise ValueError, 'Base must be an integer greater than or equal to 2 (or 0 to set default).'
+    separators[base] = str(value)
+
 def convert(value, initial, terminal, precision=0):
-    return fromNumber(toNumber(value, initial), terminal, precision)
+    return toBase(toNumber(value, initial), terminal, precision)
 
 def toNumber(value, base):
+    value = str(value)
+
     if int(base) < 2 or int(base) != base:
         raise ValueError, 'Base must be an integer greater than or equal to 2.'
 
-    value = str(value)
+    d = 0
+    s = 0
 
-    decimal = value.find('.')
+    if digits.get(base, ''):
+        d = base
 
-    value = value.replace('.', '')
+    if separators.get(base, ''):
+        s = base
+
+    decimal = value.find(separators[s])
+
+    value = value.replace(separators[s], '')
+
+    number = 0
 
     if (decimal == -1):
         i = len(value)
     else:
         i = decimal
 
-    number = 0
-    b = 0
-
-    if digits.get(base, ''):
-        b = base 
-
     for char in value:
         i -= 1
 
-        if digits[b].find(char) != -1 and digits[b].find(char) < base:
-            number += digits[b].find(char) * base**i
+        if digits[d].find(char) != -1 and digits[d].find(char) < base:
+            number += digits[d].find(char) * base**i
 
     return number
 
 
-def fromNumber(number, base, precision=0):
+def toBase(number, base, precision=0):
     if precision:
         number = float(number)
     else:
@@ -51,12 +65,18 @@ def fromNumber(number, base, precision=0):
     if int(base) < 2 or int(base) != base:
         raise ValueError, 'Base must be an integer greater than or equal to 2.'
 
-    value = ''
-    i = 0
     b = 0
+    s = 0
 
     if digits.get(base, ''):
-        b = base 
+        b = base
+    
+    if separators.get(base, ''):
+        s = base
+
+    value = ''
+
+    i = 0
 
     try:
         for i in reversed(xrange(precision + 1 + int(round(math.log(number, base), 10)))):
@@ -67,6 +87,6 @@ def fromNumber(number, base, precision=0):
         value = digits[b][0]
 
     if precision:
-        value = value[:len(value) - precision] + '.' + value[len(value) - precision:]
+        value = value[:len(value) - precision] + separators[s] + value[len(value) - precision:]
 
     return value
