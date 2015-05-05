@@ -17,13 +17,13 @@ def intLog(number, base):
 
 
 def setDigits(value, base=0):
-    if base < 0 or base == 1:
+    if base < 0 or base == 1 or int(base) != base:
         raise ValueError('Base must be an integer greater than or equal to 2 (or 0 to set default).')
     digits[base] = str(value)
 
 
 def setSeparators(value, base=0):
-    if base < 0 or base == 1:
+    if base < 0 or base == 1 or int(base) != base:
         raise ValueError('Base must be an integer greater than or equal to 2 (or 0 to set default).')
     separators[base] = str(value)
 
