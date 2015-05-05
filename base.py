@@ -18,12 +18,12 @@ def intLog(number, base):
 
 def setDigits(value, base=0):
     if base < 0 or base == 1:
-        raise ValueError, 'Base must be an integer greater than or equal to 2 (or 0 to set default).'
+        raise ValueError('Base must be an integer greater than or equal to 2 (or 0 to set default).')
     digits[base] = str(value)
 
 def setSeparators(value, base=0):
     if base < 0 or base == 1:
-        raise ValueError, 'Base must be an integer greater than or equal to 2 (or 0 to set default).'
+        raise ValueError('Base must be an integer greater than or equal to 2 (or 0 to set default).')
     separators[base] = str(value)
 
 def convert(value, initial, terminal, precision=0):
@@ -33,7 +33,7 @@ def toNumber(value, base):
     value = str(value)
 
     if int(base) < 2 or int(base) != base:
-        raise ValueError, 'Base must be an integer greater than or equal to 2.'
+        raise ValueError('Base must be an integer greater than or equal to 2.')
 
     d = 0
     s = 0
@@ -71,7 +71,7 @@ def toBase(number, base, precision=0):
         number = int(number)
 
     if int(base) < 2 or int(base) != base:
-        raise ValueError, 'Base must be an integer greater than or equal to 2.'
+        raise ValueError('Base must be an integer greater than or equal to 2.')
 
     b = 0
     s = 0
