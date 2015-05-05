@@ -35,7 +35,7 @@ def convert(value, initial, terminal, precision=0):
 def toNumber(value, base):
     value = str(value)
 
-    if int(base) < 2 or type(base) != int:
+    if base < 2 or type(base) != int:
         raise ValueError('Base must be an integer greater than or equal to 2.')
 
     d = 0
@@ -73,7 +73,7 @@ def toBase(number, base, precision=0):
     else:
         number = int(number)
 
-    if int(base) < 2 or type(base) != int:
+    if base < 2 or type(base) != int:
         raise ValueError('Base must be an integer greater than or equal to 2.')
 
     b = 0
