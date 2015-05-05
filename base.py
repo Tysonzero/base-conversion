@@ -1,5 +1,3 @@
-import math
-
 digits = {
     0:'0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ',
 }
