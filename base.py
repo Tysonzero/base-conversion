@@ -1,10 +1,11 @@
 digits = {
-    0:'0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ',
+    0: '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ',
 }
 
 separators = {
-    0:'.',
+    0: '.',
 }
+
 
 def intLog(number, base):
     i = 0
@@ -14,18 +15,22 @@ def intLog(number, base):
 
     return i - 1
 
+
 def setDigits(value, base=0):
     if base < 0 or base == 1:
         raise ValueError('Base must be an integer greater than or equal to 2 (or 0 to set default).')
     digits[base] = str(value)
+
 
 def setSeparators(value, base=0):
     if base < 0 or base == 1:
         raise ValueError('Base must be an integer greater than or equal to 2 (or 0 to set default).')
     separators[base] = str(value)
 
+
 def convert(value, initial, terminal, precision=0):
     return toBase(toNumber(value, initial), terminal, precision)
+
 
 def toNumber(value, base):
     value = str(value)
@@ -76,7 +81,7 @@ def toBase(number, base, precision=0):
 
     if digits.get(base, ''):
         b = base
-    
+
     if separators.get(base, ''):
         s = base
 
