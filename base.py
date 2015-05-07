@@ -27,10 +27,6 @@ def setSeparators(value, base=None):
     separators[base] = str(value)
 
 
-def convert(value, initial, terminal, precision=0):
-    return toBase(toNumber(value, initial), terminal, precision)
-
-
 def toNumber(value, base):
     value = str(value)
     if base < 2 or type(base) != int:
@@ -72,3 +68,7 @@ def toBase(number, base, precision=0):
     if precision:
         value = value[:len(value) - precision] + separators[s] + value[len(value) - precision:]
     return value
+
+
+def convert(value, initial, terminal, precision=0):
+    return toBase(toNumber(value, initial), terminal, precision)
