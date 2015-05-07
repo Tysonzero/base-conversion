@@ -43,10 +43,7 @@ def toNumber(value, base):
 
 
 def toBase(number, base, precision=0):
-    if precision:
-        number = float(number)
-    else:
-        number = int(number)
+    number = float(number) if precision else int(number)
     base = int(base)
     d = base if digits.get(base) else None
     s = base if separators.get(base) else None
