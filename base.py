@@ -58,7 +58,7 @@ def toBase(number, base, precision=0):
         number = int(number)
     if base < 2 or type(base) != int:
         raise ValueError('Base must be an integer greater than or equal to 2.')
-    b = base if digits.get(base) else None
+    d = base if digits.get(base) else None
     s = base if separators.get(base) else None
     value = ''
     i = 0
@@ -66,9 +66,9 @@ def toBase(number, base, precision=0):
         for i in reversed(xrange(precision + 1 + intLog(number, base))):
             x = int(number / base**(i - precision))
             number -= x * base**(i - precision)
-            value += digits[b][x]
+            value += digits[d][x]
     except ValueError:
-        value = digits[b][0]
+        value = digits[d][0]
     if precision:
         value = value[:len(value) - precision] + separators[s] + value[len(value) - precision:]
     return value
