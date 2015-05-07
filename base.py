@@ -35,12 +35,8 @@ def toNumber(value, base):
     value = str(value)
     if base < 2 or type(base) != int:
         raise ValueError('Base must be an integer greater than or equal to 2.')
-    d = None
-    s = None
-    if digits.get(base, ''):
-        d = base
-    if separators.get(base, ''):
-        s = base
+    d = base if digits.get(base) else None
+    s = base if separators.get(base) else None
     decimal = value.find(separators[s])
     value = value.replace(separators[s], '')
     number = 0
@@ -62,12 +58,8 @@ def toBase(number, base, precision=0):
         number = int(number)
     if base < 2 or type(base) != int:
         raise ValueError('Base must be an integer greater than or equal to 2.')
-    b = None
-    s = None
-    if digits.get(base, ''):
-        b = base
-    if separators.get(base, ''):
-        s = base
+    b = base if digits.get(base) else None
+    s = base if separators.get(base) else None
     value = ''
     i = 0
     try:
