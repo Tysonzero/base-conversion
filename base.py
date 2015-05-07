@@ -16,21 +16,16 @@ def intLog(number, base):
 
 
 def setDigits(value, base=None):
-    if base < 2:
-        raise ValueError('Base must be at least 2.')
-    digits[base] = str(value)
+    digits[int(base)] = str(value)
 
 
 def setSeparators(value, base=None):
-    if base < 2:
-        raise ValueError('Base must be at least 2.')
-    separators[base] = str(value)
+    separators[int(base)] = str(value)
 
 
 def toNumber(value, base):
     value = str(value)
-    if base < 2 or type(base) != int:
-        raise ValueError('Base must be an integer greater than or equal to 2.')
+    base = int(base)
     d = base if digits.get(base) else None
     s = base if separators.get(base) else None
     decimal = value.find(separators[s])
@@ -52,8 +47,7 @@ def toBase(number, base, precision=0):
         number = float(number)
     else:
         number = int(number)
-    if base < 2 or type(base) != int:
-        raise ValueError('Base must be an integer greater than or equal to 2.')
+    base = int(base)
     d = base if digits.get(base) else None
     s = base if separators.get(base) else None
     value = ''
