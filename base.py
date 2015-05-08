@@ -31,10 +31,7 @@ def toNumber(value, base):
     decimal = value.find(separators[s])
     value = value.replace(separators[s], '')
     number = 0
-    if (decimal == -1):
-        i = len(value)
-    else:
-        i = decimal
+    i = len(value) if decimal == -1 else decimal
     for char in value:
         i -= 1
         if digits[d].find(char) != -1 and digits[d].find(char) < base:
