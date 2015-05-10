@@ -8,22 +8,22 @@ separators = {
 }
 
 
-def intLog(number, base):
+def int_log(number, base):
     i = 0
     while base**i <= number:
         i += 1
     return i - 1
 
 
-def setDigits(value, base=None):
+def set_digits(value, base=None):
     digits[int(base)] = str(value)
 
 
-def setSeparators(value, base=None):
+def set_separators(value, base=None):
     separators[int(base)] = str(value)
 
 
-def toNumber(value, base):
+def to_number(value, base):
     value = str(value)
     base = int(base)
     d = base if digits.get(base) else None
@@ -38,7 +38,7 @@ def toNumber(value, base):
     return number
 
 
-def toBase(number, base, precision=0):
+def to_base(number, base, precision=0):
     number = float(number) if precision else int(number)
     base = int(base)
     d = base if digits.get(base) else None
@@ -46,7 +46,7 @@ def toBase(number, base, precision=0):
     value = ''
     i = 0
     try:
-        for i in reversed(xrange(precision + 1 + intLog(number, base))):
+        for i in reversed(xrange(precision + 1 + int_log(number, base))):
             x = int(number / base**(i - precision))
             number -= x * base**(i - precision)
             value += digits[d][x]
@@ -58,4 +58,4 @@ def toBase(number, base, precision=0):
 
 
 def convert(value, initial, terminal, precision=0):
-    return toBase(toNumber(value, initial), terminal, precision)
+    return to_base(to_number(value, initial), terminal, precision)
