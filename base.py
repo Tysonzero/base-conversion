@@ -29,13 +29,12 @@ def toNumber(value, base):
     d = base if digits.get(base) else None
     s = base if separators.get(base) else None
     decimal = value.find(separators[s])
+    decimal = len(value) - 1 if decimal == -1 else decimal - 1
     value = value.replace(separators[s], '')
     number = 0
-    i = len(value) if decimal == -1 else decimal
-    for char in value:
-        i -= 1
+    for i, char in enumerate(value):
         if digits[d].find(char) != -1 and digits[d].find(char) < base:
-            number += digits[d].find(char) * base**i
+            number += digits[d].find(char) * base**(decimal - i)
     return number
 
 
