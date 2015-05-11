@@ -44,7 +44,6 @@ def to_base(number, base, precision=0):
     d = base if digits.get(base) else None
     s = base if separators.get(base) else None
     value = ''
-    i = 0
     try:
         for i in reversed(xrange(precision + 1 + int_log(number, base))):
             x = int(number / base**(i - precision))
