@@ -44,12 +44,11 @@ def to_base(number, base, precision=0):
     digit_string = digit_strings.get(base) or digit_strings[0]
     separator = separators.get(base) or separators[0]
     value = ''
-    try:
-        for i in reversed(xrange(precision + 1 + int_log(number, base))):
-            x = int(number / base**(i - precision))
-            number -= x * base**(i - precision)
-            value += digit_string[x]
-    except ValueError:
+    for i in reversed(xrange(precision + 1 + int_log(number, base))):
+        x = int(number / base**(i - precision))
+        number -= x * base**(i - precision)
+        value += digit_string[x]
+    if not value:
         value = digit_string[0]
     if precision:
         value = value[:len(value) - precision] + separator + value[len(value) - precision:]
