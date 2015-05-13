@@ -39,6 +39,7 @@ def to_number(value, base):
 
 
 def to_base(number, base, precision=0):
+    precision = int(precision)
     number = float(number) if precision else int(number)
     base = int(base)
     digit_string = digit_strings.get(base) or digit_strings[0]
