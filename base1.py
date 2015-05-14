@@ -13,15 +13,12 @@ def set_digits(value, base=0):
 def to_number(value, base):
     value = str(value)
     base = int(base)
+    digit_string = digit_strings.get(base) or digit_strings[0]
     number = 0
-    b = 0
-
-    if digit_strings.get(base, ''):
-        b = base
 
     for i, char in enumerate(reversed(value)):
-        if digit_strings[b].find(char) != -1 and digit_strings[b].find(char) < base:
-            number += digit_strings[b].find(char) * base**i
+        if digit_string.find(char) != -1 and digit_string.find(char) < base:
+            number += digit_string.find(char) * base**i
 
     return number
 
@@ -29,19 +26,16 @@ def to_number(value, base):
 def from_number(number, base):
     number = int(number)
     base = int(base)
+    digit_string = digit_strings.get(base) or digit_strings[0]
     value = ''
-    b = 0
-
-    if digit_strings.get(base, ''):
-        b = base
 
     try:
         for i in reversed(xrange(1 + int(round(math.log(number, base), 10)))):
             x = int(number / base**i)
             number -= x * base**i
-            value += digit_strings[b][x]
+            value += digit_string[x]
     except ValueError:
-        value = digit_strings[b][0]
+        value = digit_string[0]
 
     return value
 
