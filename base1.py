@@ -6,13 +6,13 @@ digits = {
 }
 
 
-def setDigits(value, base=0):
+def set_digits(value, base=0):
     if base < 0 or base == 1:
         raise ValueError('Base must be an integer greater than or equal to 2 or 0 to set default.')
     digits[base] = value
 
 
-def toNumber(value, base):
+def to_number(value, base):
     if int(base) < 2 or int(base) != base:
         raise ValueError('Base must be an integer greater than or equal to 2.')
 
@@ -33,7 +33,7 @@ def toNumber(value, base):
     return number
 
 
-def fromNumber(number, base):
+def from_number(number, base):
     if int(base) < 2 or int(base) != base:
         raise ValueError('Base must be an integer greater than or equal to 2.')
 
@@ -56,4 +56,4 @@ def fromNumber(number, base):
 
 
 def convert(value, initial, terminal):
-    return fromNumber(toNumber(value, initial), terminal)
+    return from_number(to_number(value, initial), terminal)
