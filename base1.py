@@ -1,7 +1,7 @@
 import math
 
 
-digits = {
+digit_strings = {
     0: '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ',
 }
 
@@ -9,7 +9,7 @@ digits = {
 def set_digits(value, base=0):
     if base < 0 or base == 1:
         raise ValueError('Base must be an integer greater than or equal to 2 or 0 to set default.')
-    digits[base] = value
+    digit_strings[base] = value
 
 
 def to_number(value, base):
@@ -21,12 +21,12 @@ def to_number(value, base):
     i = 0
     b = 0
 
-    if digits.get(base, ''):
+    if digit_strings.get(base, ''):
         b = base
 
     for char in reversed(value):
-        if digits[b].find(char) != -1 and digits[b].find(char) < base:
-            number += digits[b].find(char) * base**i
+        if digit_strings[b].find(char) != -1 and digit_strings[b].find(char) < base:
+            number += digit_strings[b].find(char) * base**i
 
         i += 1
 
@@ -41,16 +41,16 @@ def from_number(number, base):
     i = 0
     b = 0
 
-    if digits.get(base, ''):
+    if digit_strings.get(base, ''):
         b = base
 
     try:
         for i in reversed(xrange(1 + int(round(math.log(number, base), 10)))):
             x = int(number / base**i)
             number -= x * base**i
-            value += digits[b][x]
+            value += digit_strings[b][x]
     except ValueError:
-        value = digits[b][0]
+        value = digit_strings[b][0]
 
     return value
 
