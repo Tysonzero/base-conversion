@@ -12,10 +12,6 @@ def setDigits(value, base=0):
     digits[base] = value
 
 
-def convert(value, initial, terminal):
-    return fromNumber(toNumber(value, initial), terminal)
-
-
 def toNumber(value, base):
     if int(base) < 2 or int(base) != base:
         raise ValueError('Base must be an integer greater than or equal to 2.')
@@ -57,3 +53,7 @@ def fromNumber(number, base):
         value = digits[b][0]
 
     return value
+
+
+def convert(value, initial, terminal):
+    return fromNumber(toNumber(value, initial), terminal)
