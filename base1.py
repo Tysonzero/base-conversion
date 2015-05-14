@@ -15,11 +15,9 @@ def to_number(value, base):
     base = int(base)
     digit_string = digit_strings.get(base) or digit_strings[0]
     number = 0
-
     for i, char in enumerate(reversed(value)):
         if digit_string.find(char) != -1 and digit_string.find(char) < base:
             number += digit_string.find(char) * base**i
-
     return number
 
 
@@ -28,7 +26,6 @@ def to_base(number, base):
     base = int(base)
     digit_string = digit_strings.get(base) or digit_strings[0]
     value = ''
-
     try:
         for i in reversed(xrange(1 + int(round(math.log(number, base), 10)))):
             x = int(number / base**i)
@@ -36,7 +33,6 @@ def to_base(number, base):
             value += digit_string[x]
     except ValueError:
         value = digit_string[0]
-
     return value
 
 
