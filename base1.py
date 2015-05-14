@@ -30,7 +30,6 @@ def from_number(number, base):
     number = int(number)
     base = int(base)
     value = ''
-    i = 0
     b = 0
 
     if digit_strings.get(base, ''):
