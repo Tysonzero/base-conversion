@@ -14,17 +14,14 @@ def to_number(value, base):
     value = str(value)
     base = int(base)
     number = 0
-    i = 0
     b = 0
 
     if digit_strings.get(base, ''):
         b = base
 
-    for char in reversed(value):
+    for i, char in enumerate(reversed(value)):
         if digit_strings[b].find(char) != -1 and digit_strings[b].find(char) < base:
             number += digit_strings[b].find(char) * base**i
-
-        i += 1
 
     return number
 
