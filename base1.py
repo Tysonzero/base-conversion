@@ -23,7 +23,7 @@ def to_number(value, base):
     return number
 
 
-def from_number(number, base):
+def to_base(number, base):
     number = int(number)
     base = int(base)
     digit_string = digit_strings.get(base) or digit_strings[0]
@@ -41,4 +41,4 @@ def from_number(number, base):
 
 
 def convert(value, initial, terminal):
-    return from_number(to_number(value, initial), terminal)
+    return to_base(to_number(value, initial), terminal)
