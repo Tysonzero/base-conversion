@@ -9,4 +9,4 @@ Instructions
 Example usage:
 
     from base import convert
-    convert('ABC.DEF', 16, 10, precision=3)
+    print convert('ABC.DEF', 16, 10, precision=3)
